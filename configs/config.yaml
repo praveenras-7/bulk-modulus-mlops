@@ -1,0 +1,59 @@
+# ============================================
+# Bulk Modulus MLOps - Project Configuration
+# ============================================
+
+project:
+  name: "bulk-modulus-mlops"
+  version: "0.1.0"
+  description: "Production MLOps pipeline for bulk modulus prediction"
+
+data:
+  raw_path: "data/raw/bulk-modulus.csv"
+  processed_path: "data/processed/processed_data.csv"
+  train_path: "data/processed/cp_train.csv"
+  val_path: "data/processed/cp_val.csv"
+  test_path: "data/processed/cp_test.csv"
+  test_size: 0.2
+  val_size: 0.1
+  random_state: 42
+  target_column: "bulk_modulus"
+  composition_column: "composition"
+
+features:
+  method: "cbfv"
+  scaler: "standard"
+
+model:
+  algorithm: "random_forest"
+  random_state: 42
+  hyperparameters:
+    random_forest:
+      n_estimators: 100
+      max_depth: 10
+      min_samples_split: 2
+    xgboost:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+    gradient_boosting:
+      n_estimators: 100
+      max_depth: 5
+      learning_rate: 0.1
+
+training:
+  cross_validation_folds: 5
+  verbose: true
+
+evaluation:
+  metrics:
+    - r2_score
+    - mae
+    - rmse
+
+logging:
+  level: "INFO"
+  file: "logs/training.log"
+
+paths:
+  models: "models/"
+  logs: "logs/"
