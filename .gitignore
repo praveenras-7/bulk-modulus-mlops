@@ -50,4 +50,5 @@ logs/
 
 # Cache
 .pytest_cache/
-.mypy_cache/
+.mypy_cache/*.egg-info/
+bulk_modulus_mlops.egg-info/
